@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Street Food Cotonou — Maquette complète</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+:root{
+  --primary:#ac0009; --primary-dark:#6d0006; --amber:#fdaa27; --amber-dark:#6a4300;
+  --bg:#fff9ee; --ink:#1e1b11; --ink-soft:#5e3f3b; --card:#ffffff;
+  --container:#f5eddb; --container-high:#eae2d0; --outline:#e8bcb7;
+  --font-d:'Anton',sans-serif; --font-b:'Plus Jakarta Sans',sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:var(--font-b);color:var(--ink);background:var(--ink);min-height:100vh;padding:0 0 70px;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--amber);color:var(--ink);}
+button{font:inherit;cursor:pointer;}
+img{display:block;object-fit:cover;}
+a{color:inherit;text-decoration:none;}
+
+header.top{padding:46px 22px 18px;text-align:center;}
+header.top .brand-wrap{display:inline-flex;align-items:center;gap:8px;background:var(--bg);padding:9px 18px;border-radius:12px;margin-bottom:16px;font-family:var(--font-d);font-size:13px;letter-spacing:.04em;color:var(--ink);text-transform:uppercase;}
+header.top .brand-wrap span.dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;}
+header.top h1{font-family:var(--font-d);text-transform:uppercase;color:#fff;font-size:clamp(22px,3.6vw,30px);letter-spacing:.01em;line-height:1.1;margin:0 0 8px;}
+header.top p{color:rgba(255,249,238,.55);margin:0;font-size:13.5px;}
+.flow-note{max-width:760px;margin:24px auto 0;background:var(--bg);border-left:4px solid var(--primary);border-radius:0 14px 14px 0;padding:16px 22px;text-align:left;color:var(--ink-soft);font-size:12.8px;line-height:1.65;box-shadow:0 14px 30px rgba(0,0,0,.35);}
+.flow-note b{color:var(--ink);}
+
+.mockup-section{max-width:1400px;margin:0 auto;padding:8px 20px 4px;}
+.section-head{max-width:820px;margin:0 auto 6px;text-align:center;}
+.section-head .num{font-family:var(--font-d);color:var(--amber);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;}
+.section-head h2{font-family:var(--font-d);text-transform:uppercase;color:#fff;font-size:clamp(20px,2.8vw,26px);margin:8px 0 8px;letter-spacing:.01em;}
+.section-head p{color:rgba(255,249,238,.55);font-size:13px;margin:0;line-height:1.6;}
+.section-divider{max-width:1200px;margin:34px auto 6px;padding:0 20px;display:flex;align-items:center;gap:16px;}
+.section-divider::before,.section-divider::after{content:"";flex:1;height:1px;background:rgba(255,249,238,.14);}
+.section-divider span{font-family:var(--font-d);text-transform:uppercase;color:rgba(255,249,238,.45);font-size:11px;letter-spacing:.04em;white-space:nowrap;}
+
+.stage-row{display:flex;flex-wrap:wrap;gap:34px 28px;justify-content:center;align-items:flex-start;padding:40px 26px;margin:20px auto 0;max-width:1360px;}
+.phone-block{display:flex;flex-direction:column;align-items:center;}
+.phone-label{color:var(--amber);font-family:var(--font-d);text-transform:uppercase;font-size:12px;letter-spacing:.03em;margin-bottom:11px;text-align:center;max-width:280px;}
+.phone{width:302px;background:var(--bg);border-radius:30px;border:7px solid var(--ink);box-shadow:0 26px 54px rgba(0,0,0,.5);overflow:hidden;position:relative;flex:none;}
+.screen{height:626px;overflow:hidden;display:flex;flex-direction:column;position:relative;background:var(--bg);}
+.screen *{scrollbar-width:none;}
+.screen ::-webkit-scrollbar{display:none;}
+.statusbar{height:32px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-weight:800;font-size:11px;background:var(--bg);}
+.statusbar .icons{display:flex;gap:4px;align-items:center;font-size:13px;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:rgba(255,249,238,.95);border-bottom:1px solid var(--outline);flex:none;}
+.topbar .id{display:flex;align-items:center;gap:8px;}
+.topbar .id .lines{display:flex;flex-direction:column;line-height:1;}
+.topbar .id .lines .a{font-family:var(--font-d);font-size:15px;text-transform:uppercase;color:var(--ink);}
+.topbar .id .lines .b{font-size:7.5px;font-weight:800;letter-spacing:.12em;color:var(--primary);text-transform:uppercase;}
+.topbar .actions{display:flex;align-items:center;gap:9px;}
+.topbar .avatar{width:24px;height:24px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;}
+.topbar .avatar i{font-size:13px;color:#fff;}
+.screen-body{flex:1;overflow-y:auto;position:relative;}
+.tabbar-mini{flex:none;display:flex;align-items:center;justify-content:space-between;padding:9px 14px;background:rgba(255,249,238,.95);border-top:1px solid var(--outline);}
+.tabbar-mini .grp{display:flex;gap:13px;}
+.tabbar-mini .t{all:unset;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink-soft);cursor:default;}
+.tabbar-mini .t i{font-size:18px;}
+.tabbar-mini .t span{font-size:8.5px;font-weight:700;}
+.tabbar-mini .t.on{color:var(--primary);}
+.tabbar-mini .cart{height:34px;padding:0 13px;background:var(--primary);color:#fff;border-radius:999px;display:flex;align-items:center;gap:5px;font-family:var(--font-d);font-size:11px;text-transform:uppercase;}
+
+/* --- écran existants : contenu --- */
+.chip-row{display:flex;gap:6px;overflow-x:auto;padding:0 14px 10px;}
+.chip{flex:none;background:var(--container-high);border:none;border-radius:999px;padding:7px 14px;font-size:11px;font-weight:700;color:var(--ink-soft);white-space:nowrap;}
+.chip.on{background:var(--primary);color:#fff;}
+.menu-item{display:flex;gap:10px;background:#fff;border-radius:16px;padding:8px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:0 14px 10px;}
+.menu-item img{width:76px;height:76px;border-radius:12px;object-fit:cover;flex-shrink:0;}
+.menu-item .top-row{display:flex;justify-content:space-between;gap:6px;}
+.menu-item .name{font-weight:700;font-size:13px;color:var(--ink);}
+.menu-item .price{font-family:var(--font-d);font-style:italic;font-size:15px;color:var(--primary);flex-shrink:0;}
+.menu-item .desc{margin:2px 0 6px;font-size:11px;color:var(--ink-soft);}
+.add-btn{height:28px;padding:0 10px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:800;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+.cart-row{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:0 14px 8px;}
+.cart-row .name{margin:0;font-weight:700;font-size:13px;color:var(--ink);}
+.cart-row .sub{margin:0;font-size:11px;color:var(--ink-soft);}
+.cart-row .price{font-family:var(--font-d);font-style:italic;font-size:15px;color:var(--primary);}
+.cart-summary{background:var(--container);border-radius:14px;padding:12px 14px;margin:6px 14px 14px;}
+.cart-summary .line{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
+.cart-summary .line.total{font-family:var(--font-d);font-size:18px;font-style:italic;color:var(--ink);border-top:1px solid var(--outline);padding-top:8px;margin-top:4px;}
+.field-label{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;}
+.field-input{width:100%;height:40px;border-radius:10px;border:1px solid var(--outline);margin:4px 0 10px;padding:0 10px;font-family:inherit;background:#fff;color:var(--ink);}
+.contact-row{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:0 14px 10px;font-size:12px;color:var(--ink);}
+.contact-row i{font-size:18px;color:var(--primary);flex:none;}
+.map-block{height:130px;border-radius:14px;background:var(--container);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:12px;margin:0 14px 14px;}
+.social-row{display:flex;gap:8px;padding:0 14px;}
+.social-row a{flex:1;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+
+/* --- confirmation screens --- */
+.conf-wrap{padding:26px 18px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+.conf-icon{width:58px;height:58px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+.conf-icon i{font-size:28px;color:#fff;}
+.conf-wrap h1{font-family:var(--font-d);text-transform:uppercase;font-size:23px;color:var(--ink);margin:0 0 6px;line-height:1.05;}
+.conf-wrap .ref{font-size:11px;font-weight:700;color:var(--ink-soft);background:var(--container);padding:5px 12px;border-radius:999px;margin-bottom:18px;}
+.conf-card{width:100%;background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);padding:14px 16px;text-align:left;margin-bottom:12px;}
+.conf-card .row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--container);font-size:12px;}
+.conf-card .row:last-child{border-bottom:none;padding-bottom:0;}
+.conf-card .row .k{color:var(--ink-soft);}
+.conf-card .row .v{font-weight:700;color:var(--ink);text-align:right;}
+.conf-card .row.total .v{color:var(--primary);font-family:var(--font-d);font-size:15px;text-transform:uppercase;}
+.conf-note{display:flex;gap:8px;align-items:flex-start;background:var(--container);border-radius:12px;padding:10px 12px;text-align:left;font-size:11px;color:var(--ink-soft);line-height:1.5;margin-bottom:16px;}
+.conf-note i{font-size:15px;color:var(--primary);flex:none;margin-top:1px;}
+.conf-actions{width:100%;display:flex;flex-direction:column;gap:9px;}
+.btn-wa{width:100%;background:#25D366;color:#fff;border:none;padding:13px 16px;border-radius:13px;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-ghost{width:100%;background:#fff;color:var(--ink);border:1px solid var(--outline);padding:12px 16px;border-radius:13px;font-weight:700;font-size:12.5px;}
+
+/* --- gallery --- */
+.gal-head{padding:18px 16px 4px;}
+.gal-head h1{font-family:var(--font-d);text-transform:uppercase;font-size:22px;color:var(--ink);margin:0 0 2px;}
+.gal-head p{font-size:11.5px;color:var(--ink-soft);margin:0;}
+.gal-chips{display:flex;gap:8px;padding:14px 16px 10px;overflow-x:auto;}
+.gal-chip{flex:none;padding:7px 14px;border-radius:999px;background:var(--container-high);font-size:11px;font-weight:700;color:var(--ink-soft);white-space:nowrap;}
+.gal-chip.on{background:var(--primary);color:#fff;}
+.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 16px 20px;}
+.gal-grid .g-item{position:relative;border-radius:12px;overflow:hidden;background:var(--container);}
+.gal-grid .g-item img{width:100%;height:100%;}
+.gal-grid .g-item.tall{grid-row:span 2;height:100%;}
+.gal-grid .g-item:not(.tall){aspect-ratio:1/1;}
+.gal-grid .g-item .cap{position:absolute;left:0;right:0;bottom:0;padding:8px;background:linear-gradient(180deg,rgba(30,27,17,0) 40%,rgba(30,27,17,.75));font-size:9.5px;font-weight:700;color:#fff;}
+
+/* --- about --- */
+.about-hero{margin:14px 16px 0;height:172px;border-radius:18px;overflow:hidden;position:relative;flex:none;}
+.about-hero img{width:100%;height:100%;}
+.about-hero .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,27,17,0) 30%,rgba(30,27,17,.85));display:flex;flex-direction:column;justify-content:flex-end;padding:16px;}
+.about-hero .tag{display:inline-block;background:var(--amber);color:var(--amber-dark);font-size:10px;font-weight:800;padding:4px 10px;border-radius:999px;margin-bottom:8px;align-self:flex-start;}
+.about-hero h3{color:#fff;font-family:var(--font-d);text-transform:uppercase;font-size:17px;margin:0;line-height:1.15;}
+.about-body{padding:16px 16px 4px;}
+.about-body p{font-size:12px;color:var(--ink-soft);line-height:1.65;margin:0 0 14px;}
+.about-values{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.about-values span{background:var(--container);color:var(--ink);font-size:10.5px;font-weight:700;padding:6px 11px;border-radius:999px;display:flex;align-items:center;gap:5px;}
+.about-values span i{font-size:13px;color:var(--primary);}
+.about-team{display:flex;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:10px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin-bottom:12px;}
+.about-team img{width:52px;height:52px;border-radius:50%;flex:none;}
+.about-team .t{font-size:12.5px;font-weight:800;color:var(--ink);}
+.about-team .s{font-size:10.5px;color:var(--ink-soft);}
+.about-info{display:flex;flex-direction:column;gap:8px;padding:0 16px 18px;}
+.about-info .r{display:flex;align-items:center;gap:9px;background:#fff;border-radius:11px;padding:9px 11px;box-shadow:0 2px 8px rgba(0,0,0,.05);font-size:11px;color:var(--ink);}
+.about-info .r i{font-size:16px;color:var(--primary);}
+
+/* --- nav menu overlay --- */
+.menu-scrim{position:absolute;inset:0;background:rgba(30,27,17,.55);z-index:2;}
+.menu-panel{position:absolute;top:0;bottom:0;left:0;width:78%;background:var(--bg);z-index:3;display:flex;flex-direction:column;box-shadow:8px 0 30px rgba(0,0,0,.35);}
+.menu-top{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 14px;border-bottom:1px solid var(--outline);}
+.menu-top .lines .a{font-family:var(--font-d);font-size:16px;text-transform:uppercase;color:var(--ink);}
+.menu-top .lines .b{font-size:8px;font-weight:800;letter-spacing:.12em;color:var(--primary);text-transform:uppercase;}
+.menu-top .close{width:30px;height:30px;border-radius:9px;background:var(--container);display:flex;align-items:center;justify-content:center;}
+.menu-top .close i{font-size:15px;}
+.menu-links{flex:1;overflow-y:auto;padding:8px 8px;}
+.menu-link{display:flex;align-items:center;gap:12px;padding:12px 10px;border-radius:11px;font-weight:700;font-size:13.5px;color:var(--ink);}
+.menu-link i{font-size:18px;color:var(--ink-soft);width:20px;}
+.menu-link.on{background:var(--primary);color:#fff;}
+.menu-link.on i{color:#fff;}
+.menu-link.new::after{content:"Nouveau";margin-left:auto;font-size:8.5px;font-weight:800;background:var(--amber);color:var(--amber-dark);padding:3px 7px;border-radius:999px;text-transform:uppercase;}
+.menu-divider{margin:8px 12px;height:1px;background:var(--outline);}
+.menu-bottom{padding:14px 14px 18px;border-top:1px solid var(--outline);}
+.menu-cta{width:100%;background:#25D366;color:#fff;border:none;padding:12px;border-radius:12px;font-weight:800;font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;}
+.menu-social{display:flex;gap:8px;}
+.menu-social a{flex:1;height:36px;border-radius:10px;background:var(--container-high);display:flex;align-items:center;justify-content:center;}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand-wrap"><span class="dot"></span> Street Food Cotonou · Maquette mobile complète</div>
+  <h1>Tous les écrans de l'app</h1>
+  <p>Les cinq écrans initiaux, présentés un par un, suivis des nouveaux écrans de confirmation, galerie, à propos et navigation.</p>
+  <div class="flow-note">
+    <b>Ce que contient cette page :</b> la maquette d'origine (Accueil, Menu, Panier, Réservation, Contact) était une seule app à onglets ; elle est ici découpée en écrans indépendants, dans le même esprit visuel que les nouveaux écrans qui suivent : confirmation de commande à emporter, confirmation de réservation de table, galerie photo, à propos, et le menu de navigation complet.
+  </div>
+</header>
+
+<!-- ================= SECTION 0 — ÉCRANS EXISTANTS ================= -->
+<section class="mockup-section">
+  <div class="section-head">
+    <div class="num">Maquette d'origine</div>
+    <h2>Écrans existants</h2>
+    <p>Les cinq écrans de l'app actuelle, chacun affiché séparément plutôt qu'en onglets.</p>
+  </div>
+  <div class="stage-row">
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Accueil</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px 14px 0;">
+            <div style="display:flex; gap:6px; margin-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:6px; background:var(--ink); color:var(--bg); padding:5px 12px; border-radius:999px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--primary);"></span><span style="font-size:10px; font-weight:800; letter-spacing:0.08em;">À COTONOU • BÉNIN</span></div>
+              <div style="display:flex; align-items:center; gap:4px; background:var(--amber); color:var(--amber-dark); padding:5px 10px; border-radius:999px; font-size:10px; font-weight:800;"><i class="ti ti-flame" style="font-size:13px;"></i>CHAUD DEVANT</div>
+            </div>
+            <h1 style="font-family:Anton; font-size:34px; line-height:0.95; text-transform:uppercase; color:var(--ink); margin:0;">LES MATINS<br><span style="color:var(--primary); font-style:italic;">BONHEURS</span><br>À STREET FOOD</h1>
+            <p style="font-size:13px; color:var(--ink-soft); margin:8px 0 14px; max-width:300px;">Des assiettes généreuses, des grillades au feu de braise et le goût authentique préparé pour vous faire revenir.</p>
+            <div style="display:flex; gap:8px; margin-bottom:16px;">
+              <button style="flex:1; background:var(--primary); color:#fff; border:none; height:44px; border-radius:14px; font-family:Anton; font-size:15px; font-style:italic; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:6px;">Voir le menu<i class="ti ti-tools-kitchen-2" style="font-size:17px;"></i></button>
+              <a href="https://wa.me/" style="height:44px; padding:0 16px; background:var(--container-high); color:var(--ink); border-radius:14px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;">Commander</a>
+            </div>
+            <div style="position:relative; border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.1); margin-bottom:16px;">
+              <div style="position:relative; aspect-ratio:4/3; overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80" alt="Riz sauce mouton" style="width:100%; height:100%;">
+                <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(30,27,17,0.7), transparent 60%);"></div>
+                <span style="position:absolute; bottom:10px; left:10px; background:var(--primary); color:#fff; font-family:Anton; font-size:18px; font-style:italic; padding:4px 10px; border-radius:8px;">3 500 FCFA</span>
+                <span style="position:absolute; top:10px; right:10px; background:var(--amber); color:var(--amber-dark); font-size:10px; font-weight:800; letter-spacing:0.06em; padding:4px 10px; border-radius:999px; text-transform:uppercase;">★ Best seller</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px;">
+                <div><p style="margin:0; font-weight:700; font-size:14px; color:var(--ink);">Riz blanc & sauce mouton</p><p style="margin:0; font-size:11px; color:var(--ink-soft);">Viande fondante, alloco rôti, piment doux</p></div>
+                <button style="width:36px; height:36px; border-radius:10px; background:var(--primary); border:none; color:#fff; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" style="font-size:18px;"></i></button>
+              </div>
+            </div>
+          </div>
+          <div style="padding:0 14px 18px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;"><h2 style="font-family:Anton; font-size:20px; text-transform:uppercase; color:var(--ink); margin:0;">Les incontournables</h2><span style="font-size:10px; font-weight:800; color:var(--primary); text-transform:uppercase;">Top choix</span></div>
+            <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:4px;">
+              <div style="min-width:150px; background:#fff; border-radius:14px; box-shadow:0 2px 8px rgba(0,0,0,0.06); overflow:hidden;">
+                <div style="position:relative; aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&q=80" alt="Demi-poulet braisé" style="width:100%; height:100%;"><span style="position:absolute; bottom:6px; right:6px; background:var(--ink); color:var(--bg); font-family:Anton; font-style:italic; font-size:13px; padding:2px 6px; border-radius:6px;">4 000 F</span></div>
+                <p style="margin:8px 8px 10px; font-size:12px; font-weight:700; color:var(--ink);">Demi-poulet braisé & alloco</p>
+              </div>
+              <div style="min-width:150px; background:#fff; border-radius:14px; box-shadow:0 2px 8px rgba(0,0,0,0.06); overflow:hidden;">
+                <div style="position:relative; aspect-ratio:16/10;"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&q=80" alt="Brochettes grillées" style="width:100%; height:100%;"><span style="position:absolute; bottom:6px; right:6px; background:var(--ink); color:var(--bg); font-family:Anton; font-style:italic; font-size:13px; padding:2px 6px; border-radius:6px;">2 500 F</span></div>
+                <p style="margin:8px 8px 10px; font-size:12px; font-weight:700; color:var(--ink);">Brochettes au feu de bois</p>
+              </div>
+            </div>
+          </div>
+          <div style="margin:0 14px 18px; background:var(--ink); border-radius:18px; overflow:hidden; position:relative;">
+            <div style="position:relative; aspect-ratio:16/9;"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=500&q=80" alt="Ambiance nocturne" style="width:100%; height:100%; opacity:0.55;"></div>
+            <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:16px;">
+              <span style="font-size:10px; font-weight:800; letter-spacing:0.1em; color:var(--amber); text-transform:uppercase;">Nocturne exclusive</span>
+              <p style="font-family:Anton; color:#fff; font-size:20px; text-transform:uppercase; margin:4px 0 8px; line-height:0.95;">Braises & ambiance<br>jusqu'au bout de la nuit</p>
+              <a href="https://wa.me/?text=Je%20veux%20reserver%20une%20table" style="align-self:flex-start; background:#fff; color:var(--ink); font-weight:700; font-size:12px; padding:8px 14px; border-radius:10px; display:flex; align-items:center; gap:6px;"><i class="ti ti-armchair" style="font-size:15px;"></i>Réserver une table</a>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t on"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+          <div class="cart"><i class="ti ti-shopping-bag" style="font-size:14px;"></i>Panier</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Menu</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px 14px 0;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2px;"><h1 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:0;">Notre carte</h1><i class="ti ti-soup" style="font-size:22px; color:var(--primary);"></i></div>
+            <p style="font-size:12px; color:var(--ink-soft); margin:0 0 10px;">Sélectionnez vos plats et personnalisez votre commande.</p>
+          </div>
+          <div class="chip-row">
+            <button class="chip on">Tout</button>
+            <button class="chip">Plats chauds</button>
+            <button class="chip">Grillades</button>
+            <button class="chip">Boissons</button>
+          </div>
+          <div class="menu-item">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&q=80" alt="Riz sauce mouton">
+            <div style="flex:1; min-width:0;">
+              <div class="top-row"><span class="name">Riz sauce mouton</span><span class="price">3 500 F</span></div>
+              <p class="desc">Riz au jasmin, mouton mijoté aux épices</p>
+              <button class="add-btn"><i class="ti ti-shopping-cart" style="font-size:13px;"></i>Ajouter</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=200&q=80" alt="Demi-poulet braisé">
+            <div style="flex:1; min-width:0;">
+              <div class="top-row"><span class="name">Demi-poulet braisé</span><span class="price">4 000 F</span></div>
+              <p class="desc">Grillé au charbon, alloco et oignons</p>
+              <button class="add-btn"><i class="ti ti-shopping-cart" style="font-size:13px;"></i>Ajouter</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=200&q=80" alt="Brochettes grillées">
+            <div style="flex:1; min-width:0;">
+              <div class="top-row"><span class="name">Brochettes au feu de bois</span><span class="price">2 500 F</span></div>
+              <p class="desc">Bœuf mariné, piment doux, oignons grillés</p>
+              <button class="add-btn"><i class="ti ti-shopping-cart" style="font-size:13px;"></i>Ajouter</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <img src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=200&q=80" alt="Bissap glacé">
+            <div style="flex:1; min-width:0;">
+              <div class="top-row"><span class="name">Bissap glacé</span><span class="price">1 000 F</span></div>
+              <p class="desc">Infusion d'hibiscus, gingembre, menthe fraîche</p>
+              <button class="add-btn"><i class="ti ti-shopping-cart" style="font-size:13px;"></i>Ajouter</button>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t on"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+          <div class="cart"><i class="ti ti-shopping-bag" style="font-size:14px;"></i>Panier</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Panier</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <h1 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:14px 14px 12px;">Votre panier</h1>
+          <div class="cart-row"><div><p class="name">Riz sauce mouton</p><p class="sub">x2 • 3 500 F</p></div><span class="price">7 000 F</span></div>
+          <div class="cart-row"><div><p class="name">Bissap glacé</p><p class="sub">x1 • 1 000 F</p></div><span class="price">1 000 F</span></div>
+          <div class="cart-summary">
+            <div class="line"><span>Sous-total</span><span>8 000 F</span></div>
+            <div class="line"><span>Livraison</span><span>1 000 F</span></div>
+            <div class="line total"><span>Total</span><span>9 000 F</span></div>
+          </div>
+          <div style="padding:0 14px;"><a href="https://wa.me/?text=Je%20valide%20ma%20commande" style="display:flex; align-items:center; justify-content:center; gap:8px; height:46px; background:var(--primary); color:#fff; border-radius:14px; font-family:Anton; font-style:italic; font-size:15px; text-transform:uppercase;">Commander sur WhatsApp<i class="ti ti-brand-whatsapp" style="font-size:18px;"></i></a></div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+          <div class="cart" style="background:var(--primary-dark);"><i class="ti ti-shopping-bag" style="font-size:14px;"></i>Panier</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Réservation</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px;">
+            <h1 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:0 0 4px;">Réserver une table</h1>
+            <p style="font-size:12px; color:var(--ink-soft); margin:0 0 14px;">Places limitées, surtout le week-end.</p>
+            <label class="field-label">Date</label>
+            <input type="date" class="field-input">
+            <label class="field-label">Heure</label>
+            <select class="field-input"><option>19h00</option><option>20h00</option><option>21h00</option><option>22h00</option></select>
+            <label class="field-label">Nombre de personnes</label>
+            <input type="number" min="1" value="2" class="field-input">
+            <label class="field-label">Nom</label>
+            <input type="text" placeholder="Votre nom" class="field-input" style="margin-bottom:6px;">
+            <button style="width:100%; height:46px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-family:Anton; font-style:italic; font-size:15px; text-transform:uppercase; margin-top:8px;">Confirmer la réservation</button>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t on"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+          <div class="cart"><i class="ti ti-shopping-bag" style="font-size:14px;"></i>Panier</div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Contact</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <h1 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:14px 14px 12px;">Retrouvez-nous</h1>
+          <div class="contact-row"><i class="ti ti-map-pin"></i><span>Haie Vive, Boulevard de la Marina, Cotonou</span></div>
+          <div class="contact-row"><i class="ti ti-clock"></i><span>Mardi - Dimanche, dès 11h30 non-stop</span></div>
+          <div class="contact-row"><i class="ti ti-phone"></i><span>+229 01 00 00 00 (Service client & WhatsApp)</span></div>
+          <div class="map-block"><i class="ti ti-map-2" style="font-size:22px; margin-right:6px;"></i>Carte interactive</div>
+          <div class="social-row">
+            <a href="https://instagram.com" style="background:var(--container-high);"><i class="ti ti-brand-instagram" style="font-size:19px; color:var(--ink);"></i></a>
+            <a href="https://wa.me/" style="background:#25D366;"><i class="ti ti-brand-whatsapp" style="font-size:19px; color:#fff;"></i></a>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t on"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+          <div class="cart"><i class="ti ti-shopping-bag" style="font-size:14px;"></i>Panier</div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"><span>Étape suivante</span></div>
+
+<!-- ================= SECTION 1 — CONFIRMATION ================= -->
+<section class="mockup-section">
+  <div class="section-head">
+    <div class="num">Nouveaux écrans</div>
+    <h2>Écrans de confirmation</h2>
+    <p>Ce que le client voit juste après avoir validé une commande à emporter ou réservé une table.</p>
+  </div>
+  <div class="stage-row">
+
+    <div class="phone-block">
+      <div class="phone-label">Confirmation · Commande à emporter</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="screen-body">
+          <div class="conf-wrap">
+            <div class="conf-icon"><i class="ti ti-check"></i></div>
+            <h1>Commande confirmée !</h1>
+            <div class="ref">Commande N° SFC-0842</div>
+            <div class="conf-card">
+              <div class="row"><span class="k">2× Riz blanc & sauce mouton</span><span class="v">7 000 F</span></div>
+              <div class="row"><span class="k">1× Brochettes au feu de bois</span><span class="v">2 500 F</span></div>
+              <div class="row total"><span class="k">Total</span><span class="v">9 500 FCFA</span></div>
+            </div>
+            <div class="conf-note"><i class="ti ti-map-pin"></i>Retrait à Haie Vive, Boulevard de la Marina — aujourd'hui à 19h30.</div>
+            <div class="conf-actions">
+              <button class="btn-wa"><i class="ti ti-brand-whatsapp"></i>Suivre ma commande sur WhatsApp</button>
+              <button class="btn-ghost">Retour à l'accueil</button>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Confirmation · Réservation de table</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="screen-body">
+          <div class="conf-wrap">
+            <div class="conf-icon"><i class="ti ti-armchair"></i></div>
+            <h1>Table réservée !</h1>
+            <div class="ref">Réservation N° SFC-R219</div>
+            <div class="conf-card">
+              <div class="row"><span class="k">Nom</span><span class="v">Fabrice Houngbédji</span></div>
+              <div class="row"><span class="k">Date</span><span class="v">Samedi 12 sept.</span></div>
+              <div class="row"><span class="k">Heure</span><span class="v">20h00</span></div>
+              <div class="row"><span class="k">Personnes</span><span class="v">4</span></div>
+              <div class="row"><span class="k">Espace</span><span class="v">Terrasse nocturne</span></div>
+            </div>
+            <div class="conf-note"><i class="ti ti-clock"></i>Merci de prévenir par WhatsApp en cas de retard de plus de 15 minutes, la table reste bloquée jusque-là.</div>
+            <div class="conf-actions">
+              <button class="btn-wa"><i class="ti ti-brand-whatsapp"></i>Envoyer la confirmation par WhatsApp</button>
+              <button class="btn-ghost">Ajouter à mon calendrier</button>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t on"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"><span>Contenu & découverte</span></div>
+
+<!-- ================= SECTION 2 — GALERIE & À PROPOS ================= -->
+<section class="mockup-section">
+  <div class="section-head">
+    <div class="num">Nouvelles pages</div>
+    <h2>Galerie photo & À propos</h2>
+    <p>Deux écrans accessibles depuis le menu, pour donner envie et raconter le lieu.</p>
+  </div>
+  <div class="stage-row">
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Galerie photo</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;"></i><div class="lines"><span class="a">Galerie</span></div></div>
+          <div class="actions"><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div class="gal-head"><h1>Dans nos braises</h1><p>Des grillades, de l'ambiance, et l'équipe qui fait tout tourner.</p></div>
+          <div class="gal-chips">
+            <div class="gal-chip on">Tout</div>
+            <div class="gal-chip">Grillades</div>
+            <div class="gal-chip">Ambiance</div>
+            <div class="gal-chip">Équipe</div>
+          </div>
+          <div class="gal-grid">
+            <div class="g-item tall"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80" alt="Ambiance nocturne"><div class="cap">Nocturne</div></div>
+            <div class="g-item"><img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?w=400&q=80" alt="Brochettes"></div>
+            <div class="g-item"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=400&q=80" alt="Poulet braisé"></div>
+            <div class="g-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80" alt="Riz sauce"></div>
+            <div class="g-item"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&q=80" alt="En cuisine"></div>
+            <div class="g-item tall"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&q=80" alt="Clients à table"><div class="cap">Entre amis</div></div>
+            <div class="g-item"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=80" alt="Flammes du grill"></div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · À propos</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;"></i><div class="lines"><span class="a">À propos</span></div></div>
+          <div class="actions"><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div class="about-hero">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Terrasse le soir">
+            <div class="ov"><span class="tag">Depuis 2019</span><h3>Le feu de braise avant tout</h3></div>
+          </div>
+          <div class="about-body">
+            <p>Né d'un simple étal à Haie Vive, Street Food Cotonou est devenu un rendez-vous du soir : grillades préparées devant vous, produits achetés chaque matin au marché, et une terrasse ouverte jusque tard.</p>
+            <div class="about-values">
+              <span><i class="ti ti-flame"></i>Feu de braise</span>
+              <span><i class="ti ti-leaf"></i>Produits locaux</span>
+              <span><i class="ti ti-home-heart"></i>Fait maison</span>
+            </div>
+            <div class="about-team">
+              <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=200&q=80" alt="Chef">
+              <div><div class="t">Chef Rosine</div><div class="s">Aux fourneaux depuis le premier jour</div></div>
+            </div>
+          </div>
+          <div class="about-info">
+            <div class="r"><i class="ti ti-map-pin"></i>Haie Vive, Boulevard de la Marina, Cotonou</div>
+            <div class="r"><i class="ti ti-clock"></i>Mardi – Dimanche, dès 11h30 non-stop</div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin"></i><span>Contact</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"><span>Se repérer dans l'app</span></div>
+
+<!-- ================= SECTION 3 — NAVIGATION ================= -->
+<section class="mockup-section" style="padding-bottom:30px;">
+  <div class="section-head">
+    <div class="num">Structure</div>
+    <h2>Barre de navigation</h2>
+    <p>L'icône ☰ en haut à gauche ouvre ce menu, qui rassemble toutes les pages — y compris les deux nouvelles.</p>
+  </div>
+  <div class="stage-row">
+
+    <div class="phone-block">
+      <div class="phone-label">Menu ouvert depuis l'accueil</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5"></i><i class="ti ti-wifi"></i><i class="ti ti-battery-3"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-menu-2" style="font-size:20px;"></i><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div class="avatar"><i class="ti ti-user"></i></div></div>
+        </div>
+        <div class="screen-body" style="position:relative;">
+          <div class="menu-scrim"></div>
+          <div class="menu-panel">
+            <div class="menu-top">
+              <div class="lines"><div class="a">Cotonou</div><div class="b">Street Food</div></div>
+              <div class="close"><i class="ti ti-x"></i></div>
+            </div>
+            <div class="menu-links">
+              <div class="menu-link on"><i class="ti ti-flame"></i>Accueil</div>
+              <div class="menu-link"><i class="ti ti-tools-kitchen-2"></i>Menu</div>
+              <div class="menu-link"><i class="ti ti-armchair"></i>Réservation</div>
+              <div class="menu-divider"></div>
+              <div class="menu-link new"><i class="ti ti-photo"></i>Galerie photo</div>
+              <div class="menu-link new"><i class="ti ti-info-circle"></i>À propos</div>
+              <div class="menu-divider"></div>
+              <div class="menu-link"><i class="ti ti-map-pin"></i>Contact</div>
+              <div class="menu-link"><i class="ti ti-shopping-bag"></i>Mon panier</div>
+              <div class="menu-link"><i class="ti ti-receipt"></i>Mes commandes</div>
+            </div>
+            <div class="menu-bottom">
+              <button class="menu-cta"><i class="ti ti-brand-whatsapp"></i>Commander sur WhatsApp</button>
+              <div class="menu-social">
+                <a href="#"><i class="ti ti-brand-instagram" style="font-size:18px;"></i></a>
+                <a href="#"><i class="ti ti-brand-facebook" style="font-size:18px;"></i></a>
+                <a href="#"><i class="ti ti-phone" style="font-size:18px;"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>
