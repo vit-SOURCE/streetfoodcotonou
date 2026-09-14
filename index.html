@@ -85,7 +85,12 @@ header.top p{color:rgba(255,249,238,.55);margin:0;font-size:13.5px;}
 .field-input{width:100%;height:40px;border-radius:10px;border:1px solid var(--outline);margin:4px 0 10px;padding:0 10px;font-family:inherit;background:#fff;color:var(--ink);}
 .contact-row{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:0 14px 10px;font-size:12px;color:var(--ink);}
 .contact-row i{font-size:18px;color:var(--primary);flex:none;}
-.map-block{height:130px;border-radius:14px;background:var(--container);display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:12px;margin:0 14px 14px;}
+.map-block{height:150px;border-radius:14px;overflow:hidden;position:relative;margin:0 14px 14px;background:var(--container);}
+.map-block iframe{width:100%;height:100%;border:0;display:block;}
+.map-block .map-cap{position:absolute;left:8px;right:8px;bottom:8px;background:rgba(255,255,255,.95);backdrop-filter:blur(4px);border-radius:10px;padding:7px 10px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.map-block .map-cap i{font-size:14px;color:var(--primary);flex:none;}
+.map-block .map-cap span{flex:1;}
+.map-block .map-cap a{font-size:10px;font-weight:800;color:var(--primary);white-space:nowrap;}
 .social-row{display:flex;gap:8px;padding:0 14px;}
 .social-row a{flex:1;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
 
@@ -175,6 +180,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 .stepper{display:flex;align-items:center;gap:12px;margin:6px 0 12px;}
 .stepper button{width:44px;height:44px;border-radius:10px;border:1px solid var(--outline);background:#fff;font-size:18px;font-weight:700;color:var(--ink);}
 .stepper span{font-weight:800;font-size:16px;min-width:20px;text-align:center;display:inline-block;}
+.stepper-sm{display:flex;align-items:center;gap:7px;}
+.stepper-sm button{width:28px;height:28px;border-radius:8px;border:1px solid var(--outline);background:#fff;font-size:14px;font-weight:700;color:var(--ink);}
+.stepper-sm span{font-weight:800;font-size:12.5px;min-width:14px;text-align:center;display:inline-block;}
 
 /* --- écran profil (remplace le menu burger) --- */
 .profile-greet{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:14px 14px;}
@@ -188,9 +196,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 .profile-link.new::after{content:"Nouveau";margin-left:auto;font-size:8.5px;font-weight:800;background:var(--amber);color:var(--amber-dark);padding:3px 7px;border-radius:999px;text-transform:uppercase;}
 
 /* --- création de compte & paiement (checkout) --- */
-.checkout-steps{display:flex;align-items:center;gap:6px;padding:14px 14px 0;}
-.checkout-steps .s{flex:1;height:4px;border-radius:999px;background:var(--container-high);}
-.checkout-steps .s.done{background:var(--primary);}
 .pay-summary{background:var(--container);border-radius:14px;padding:12px 14px;margin:14px;}
 .pay-summary .line{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-soft);margin-bottom:4px;}
 .pay-summary .line.total{font-family:var(--font-b);font-weight:800;font-size:16px;color:#fff;background:var(--primary);border-radius:10px;padding:10px 12px;margin-top:8px;}
@@ -271,18 +276,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 <header class="top">
   <div class="brand-wrap"><span class="dot"></span> Street Food Cotonou · Maquette mobile complète</div>
   <h1>Tous les écrans de l'app</h1>
-  <p>Les cinq écrans initiaux, présentés un par un, suivis des nouveaux écrans de confirmation, galerie, à propos et navigation.</p>
+  <p>Deux tunnels bien séparés — commande et réservation — suivis des pages transverses, de la galerie/à propos et du back-office.</p>
   <div class="flow-note">
-    <b>Révision UX/UI appliquée :</b> navigation unifiée (panier uniquement en haut à droite, menu burger remplacé par l'onglet Profil), zones tactiles ≥44×44px, affordance de défilement sur les puces de filtre, pilules horaires et stepper pour la réservation, hiérarchie typographique clarifiée (Anton pour les titres, Plus Jakarta Sans pour les prix/boutons), contraste renforcé sur les visuels, micro-interactions au clic, et total du panier mis en évidence.
+    <b>Dernière révision :</b> quantités ajustables (+/−) dans le panier, carte remplacée par le Plus Code Google Maps <b>994W+J67, Cotonou</b>, et écrans réordonnés selon le parcours réel du client : le tunnel de commande (accueil → menu → panier → compte → paiement → reçu) est désormais entièrement regroupé, séparé du tunnel de réservation (réservation → confirmation), qui ne s'y mélange plus.
   </div>
 </header>
 
-<!-- ================= SECTION 0 — ÉCRANS EXISTANTS ================= -->
+<!-- ================= SECTION 0 — PARCOURS COMMANDE ================= -->
 <section class="mockup-section">
   <div class="section-head">
-    <div class="num">Maquette d'origine</div>
-    <h2>Écrans existants</h2>
-    <p>Les cinq écrans de l'app actuelle, chacun affiché séparément plutôt qu'en onglets.</p>
+    <div class="num">Flux client · commande</div>
+    <h2>Parcours de commande</h2>
+    <p>Un seul tunnel, dans l'ordre : accueil → menu → panier → création de compte → paiement FedaPay → reçu.</p>
   </div>
   <div class="stage-row">
 
@@ -296,26 +301,21 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
         <div class="screen-body">
           <div style="padding:14px 14px 0;">
-            <div style="display:flex; gap:6px; margin-bottom:12px;">
-              <div style="display:flex; align-items:center; gap:6px; background:var(--ink); color:var(--bg); padding:5px 12px; border-radius:999px;"><span style="width:6px; height:6px; border-radius:50%; background:var(--primary);"></span><span style="font-size:10px; font-weight:800; letter-spacing:0.08em;">À COTONOU • BÉNIN</span></div>
-              <div style="display:flex; align-items:center; gap:4px; background:var(--amber); color:var(--amber-dark); padding:5px 10px; border-radius:999px; font-size:10px; font-weight:800;"><i class="ti ti-flame" style="font-size:13px;" aria-hidden="true"></i>CHAUD DEVANT</div>
-            </div>
-            <h2 style="font-family:Anton; font-size:34px; line-height:0.95; text-transform:uppercase; color:var(--ink); margin:0;">LES MATINS<br><span style="color:var(--primary); font-style:italic;">BONHEURS</span><br>À STREET FOOD</h2>
-            <p style="font-size:13px; color:var(--ink-soft); margin:8px 0 14px; max-width:300px;">Des assiettes généreuses, des grillades au feu de braise et le goût authentique préparé pour vous faire revenir.</p>
+            <div style="display:flex; align-items:center; gap:6px; background:var(--ink); color:var(--bg); padding:5px 12px; border-radius:999px; margin-bottom:12px; align-self:flex-start; width:fit-content;"><span style="width:6px; height:6px; border-radius:50%; background:var(--primary);"></span><span style="font-size:10px; font-weight:800; letter-spacing:0.08em;">À COTONOU • BÉNIN</span></div>
+            <h2 style="font-family:Anton; font-size:30px; line-height:0.98; text-transform:uppercase; color:var(--ink); margin:0 0 14px;">Les matins bonheurs <span style="color:var(--primary); font-style:italic;">à Street Food</span></h2>
             <div style="display:flex; gap:8px; margin-bottom:16px;">
               <button style="flex:1; background:var(--primary); color:#fff; border:none; height:44px; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:6px;">Voir le menu<i class="ti ti-tools-kitchen-2" style="font-size:17px;" aria-hidden="true"></i></button>
               <button style="height:44px; padding:0 16px; background:var(--container-high); color:var(--ink); border:none; border-radius:14px; display:flex; align-items:center; justify-content:center; gap:6px; font-weight:700; font-size:13px;"><i class="ti ti-photo" style="font-size:16px;" aria-hidden="true"></i>Galerie</button>
             </div>
             <div style="position:relative; border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.1); margin-bottom:16px;">
-              <div style="position:relative; aspect-ratio:4/3; overflow:hidden;">
+              <div style="position:relative; aspect-ratio:16/9; overflow:hidden;">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=500&q=80" alt="Riz sauce mouton" style="width:100%; height:100%;">
-                <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(30,27,17,0.85), rgba(30,27,17,0.15) 55%, transparent 75%);"></div>
+                <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(30,27,17,0.8), transparent 60%);"></div>
                 <span style="position:absolute; bottom:10px; left:10px; background:rgba(172,0,9,0.92); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:#fff; font-weight:800; font-size:14px; padding:5px 11px; border-radius:8px;">3 500 FCFA</span>
-                <span style="position:absolute; top:10px; right:10px; background:rgba(253,170,39,0.95); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); color:var(--amber-dark); font-size:10px; font-weight:800; letter-spacing:0.06em; padding:4px 10px; border-radius:999px; text-transform:uppercase;">★ Best seller</span>
               </div>
               <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 12px;">
-                <div><p style="margin:0; font-weight:700; font-size:14px; color:var(--ink);">Riz blanc & sauce mouton</p><p style="margin:0; font-size:11px; color:var(--ink-soft);">Viande fondante, alloco rôti, piment doux</p></div>
-                <button style="width:36px; height:36px; border-radius:10px; background:var(--primary); border:none; color:#fff; display:flex; align-items:center; justify-content:center;"><i class="ti ti-plus" style="font-size:18px;" aria-hidden="true"></i></button>
+                <p style="margin:0; font-weight:700; font-size:13px; color:var(--ink);">Riz blanc & sauce mouton</p>
+                <button style="width:36px; height:36px; border-radius:10px; background:var(--primary); border:none; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="ti ti-plus" style="font-size:18px;" aria-hidden="true"></i></button>
               </div>
             </div>
           </div>
@@ -361,7 +361,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
       </div></div>
     </div>
-
     <div class="phone-block">
       <div class="phone-label">Écran · Menu</div>
       <div class="phone"><div class="screen">
@@ -425,7 +424,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
       </div></div>
     </div>
-
     <div class="phone-block">
       <div class="phone-label">Écran · Panier</div>
       <div class="phone"><div class="screen">
@@ -436,8 +434,34 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
         <div class="screen-body">
           <h2 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:14px 14px 12px;">Votre panier</h2>
-          <div class="cart-row"><div><p class="name">Riz sauce mouton</p><p class="sub">x2 • 3 500 F</p></div><span class="price">7 000 F</span></div>
-          <div class="cart-row"><div><p class="name">Bissap glacé</p><p class="sub">x1 • 1 000 F</p></div><span class="price">1 000 F</span></div>
+          <div class="cart-row" style="flex-direction:column; align-items:stretch; gap:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <p class="name" style="margin:0;">Riz sauce mouton</p>
+              <span class="price">7 000 F</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <p class="sub" style="margin:0;">3 500 F / unité</p>
+              <div class="stepper-sm">
+                <button type="button" aria-label="Retirer un Riz sauce mouton">−</button>
+                <span>2</span>
+                <button type="button" aria-label="Ajouter un Riz sauce mouton">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="cart-row" style="flex-direction:column; align-items:stretch; gap:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+              <p class="name" style="margin:0;">Bissap glacé</p>
+              <span class="price">1 000 F</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <p class="sub" style="margin:0;">1 000 F / unité</p>
+              <div class="stepper-sm">
+                <button type="button" aria-label="Retirer un Bissap glacé">−</button>
+                <span>1</span>
+                <button type="button" aria-label="Ajouter un Bissap glacé">+</button>
+              </div>
+            </div>
+          </div>
           <div class="cart-summary">
             <div class="line"><span>Sous-total</span><span>8 000 F</span></div>
             <div class="line"><span>Livraison</span><span>1 000 F</span></div>
@@ -456,6 +480,114 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
       </div></div>
     </div>
+    <div class="phone-block">
+      <div class="phone-label">Écran · Créer un compte</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Finaliser</span></div></div>
+          <div class="actions"></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px;">
+            <h2 style="font-family:Anton; font-size:22px; text-transform:uppercase; color:var(--ink); margin:0 0 4px;">Créer votre compte</h2>
+            <p style="font-size:12px; color:var(--ink-soft); margin:0 0 14px;">Pour recevoir votre reçu et suivre votre commande. Ça prend 20 secondes.</p>
+            <label class="field-label" for="acc-nom">Nom complet</label>
+            <input type="text" id="acc-nom" placeholder="Ex : Fabrice Houngbédji" class="field-input">
+            <label class="field-label" for="acc-tel">Téléphone</label>
+            <input type="tel" id="acc-tel" placeholder="+229 XX XX XX XX" class="field-input">
+            <label class="field-label" for="acc-mail">E-mail (optionnel)</label>
+            <input type="email" id="acc-mail" placeholder="vous@exemple.com" class="field-input">
+            <label class="field-label" for="acc-pass">Mot de passe</label>
+            <input type="password" id="acc-pass" placeholder="6 caractères minimum" class="field-input" style="margin-bottom:6px;">
+            <button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-top:8px;">Continuer vers le paiement</button>
+            <p style="text-align:center; font-size:11px; color:var(--ink-soft); margin:12px 0 0;">Déjà client ? <span style="color:var(--primary); font-weight:700;">Se connecter</span></p>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="phone-block">
+      <div class="phone-label">Écran · Paiement FedaPay</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Paiement</span></div></div>
+          <div class="actions"></div>
+        </div>
+        <div class="screen-body">
+          <h2 style="font-family:Anton; font-size:22px; text-transform:uppercase; color:var(--ink); margin:14px 14px 10px;">Moyen de paiement</h2>
+          <div class="pay-method on">
+            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">MTN Mobile Money</div><div class="sub">+229 XX XX XX XX</div></div>
+            <div class="radio"></div>
+          </div>
+          <div class="pay-method">
+            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">Moov Money</div><div class="sub">Paiement mobile</div></div>
+            <div class="radio"></div>
+          </div>
+          <div class="pay-method">
+            <div class="ic"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">Carte bancaire</div><div class="sub">Visa, Mastercard</div></div>
+            <div class="radio"></div>
+          </div>
+          <div class="pay-summary">
+            <div class="line"><span>Sous-total</span><span>8 000 F</span></div>
+            <div class="line"><span>Livraison</span><span>1 000 F</span></div>
+            <div class="line total"><span>Total à payer</span><span>9 000 F</span></div>
+          </div>
+          <div style="padding:0 14px;"><button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-bottom:12px;">Payer 9 000 FCFA</button></div>
+          <div class="fedapay-badge"><i class="ti ti-shield-check" aria-hidden="true"></i>Paiement sécurisé par <b>FedaPay</b></div>
+        </div>
+      </div></div>
+    </div>
+    <div class="phone-block">
+      <div class="phone-label">Confirmation · Commande à emporter</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="screen-body">
+          <div class="conf-wrap">
+            <div class="conf-icon"><i class="ti ti-check" aria-hidden="true"></i></div>
+            <h2>Paiement reçu !</h2>
+            <div class="ref">Commande N° SFC-0842</div>
+            <div class="conf-card">
+              <div class="row"><span class="k">2× Riz blanc & sauce mouton</span><span class="v">7 000 F</span></div>
+              <div class="row"><span class="k">1× Brochettes au feu de bois</span><span class="v">2 500 F</span></div>
+              <div class="row total"><span class="k">Total payé</span><span class="v">9 500 FCFA</span></div>
+            </div>
+            <div class="conf-note"><i class="ti ti-mail" aria-hidden="true"></i>Le reçu a été envoyé sur votre compte, et une copie transmise au restaurant pour préparation immédiate.</div>
+            <div class="conf-note"><i class="ti ti-map-pin" aria-hidden="true"></i>Retrait à Haie Vive, Boulevard de la Marina — aujourd'hui à 19h30.</div>
+            <div class="conf-actions">
+              <button class="btn-wa" style="background:var(--primary);"><i class="ti ti-receipt" aria-hidden="true"></i>Voir mon reçu</button>
+              <button class="btn-ghost">Retour à l'accueil</button>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
+            <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"><span>Flux séparé, ne se mélange pas</span></div>
+
+<!-- ================= SECTION 1 — PARCOURS RÉSERVATION ================= -->
+<section class="mockup-section">
+  <div class="section-head">
+    <div class="num">Flux client · réservation</div>
+    <h2>Parcours de réservation</h2>
+    <p>Un tunnel à part, indépendant de la commande : réserver une table, puis la confirmation.</p>
+  </div>
+  <div class="stage-row">
 
     <div class="phone-block">
       <div class="phone-label">Écran · Réservation</div>
@@ -500,164 +632,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
       </div></div>
     </div>
-
-    <div class="phone-block">
-      <div class="phone-label">Écran · Contact</div>
-      <div class="phone"><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
-        <div class="topbar">
-          <div class="id"><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
-          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;" aria-hidden="true"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user" aria-hidden="true"></i></div></div>
-        </div>
-        <div class="screen-body">
-          <h2 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:14px 14px 12px;">Retrouvez-nous</h2>
-          <div class="contact-row"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Haie Vive, Boulevard de la Marina, Cotonou</span></div>
-          <div class="contact-row"><i class="ti ti-clock" aria-hidden="true"></i><span>Mardi - Dimanche, dès 11h30 non-stop</span></div>
-          <div class="contact-row"><i class="ti ti-phone" aria-hidden="true"></i><span>+229 01 00 00 00 (Service client & WhatsApp)</span></div>
-          <div class="map-block"><i class="ti ti-map-2" style="font-size:22px; margin-right:6px;" aria-hidden="true"></i>Carte interactive</div>
-          <div class="social-row">
-            <a href="https://instagram.com" style="background:var(--container-high);"><i class="ti ti-brand-instagram" style="font-size:19px; color:var(--ink);" aria-hidden="true"></i></a>
-            <a href="https://wa.me/" style="background:#25D366;"><i class="ti ti-brand-whatsapp" style="font-size:19px; color:#fff;" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="tabbar-mini">
-          <div class="grp">
-            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
-            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
-            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
-            <div class="t on"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
-            <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="section-divider"><span>Tunnel de commande</span></div>
-
-<!-- ================= SECTION 0.5 — COMPTE & PAIEMENT ================= -->
-<section class="mockup-section">
-  <div class="section-head">
-    <div class="num">Nouveau parcours</div>
-    <h2>Créer un compte & payer</h2>
-    <p>Fini WhatsApp pour commander : le client crée son compte juste avant de payer (comme sur Black Market), puis règle via FedaPay.</p>
-  </div>
-  <div class="stage-row">
-
-    <div class="phone-block">
-      <div class="phone-label">Écran · Créer un compte</div>
-      <div class="phone"><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
-        <div class="topbar">
-          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Finaliser</span></div></div>
-          <div class="actions"></div>
-        </div>
-        <div class="checkout-steps"><div class="s done"></div><div class="s done"></div><div class="s"></div></div>
-        <div class="screen-body">
-          <div style="padding:14px;">
-            <h2 style="font-family:Anton; font-size:22px; text-transform:uppercase; color:var(--ink); margin:0 0 4px;">Créer votre compte</h2>
-            <p style="font-size:12px; color:var(--ink-soft); margin:0 0 14px;">Pour recevoir votre reçu et suivre votre commande. Ça prend 20 secondes.</p>
-            <label class="field-label" for="acc-nom">Nom complet</label>
-            <input type="text" id="acc-nom" placeholder="Ex : Fabrice Houngbédji" class="field-input">
-            <label class="field-label" for="acc-tel">Téléphone</label>
-            <input type="tel" id="acc-tel" placeholder="+229 XX XX XX XX" class="field-input">
-            <label class="field-label" for="acc-mail">E-mail (optionnel)</label>
-            <input type="email" id="acc-mail" placeholder="vous@exemple.com" class="field-input">
-            <label class="field-label" for="acc-pass">Mot de passe</label>
-            <input type="password" id="acc-pass" placeholder="6 caractères minimum" class="field-input" style="margin-bottom:6px;">
-            <button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-top:8px;">Continuer vers le paiement</button>
-            <p style="text-align:center; font-size:11px; color:var(--ink-soft); margin:12px 0 0;">Déjà client ? <span style="color:var(--primary); font-weight:700;">Se connecter</span></p>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-    <div class="phone-block">
-      <div class="phone-label">Écran · Paiement FedaPay</div>
-      <div class="phone"><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
-        <div class="topbar">
-          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Paiement</span></div></div>
-          <div class="actions"></div>
-        </div>
-        <div class="checkout-steps"><div class="s done"></div><div class="s done"></div><div class="s done"></div></div>
-        <div class="screen-body">
-          <h2 style="font-family:Anton; font-size:22px; text-transform:uppercase; color:var(--ink); margin:14px 14px 10px;">Moyen de paiement</h2>
-          <div class="pay-method on">
-            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
-            <div style="flex:1;"><div class="name">MTN Mobile Money</div><div class="sub">+229 XX XX XX XX</div></div>
-            <div class="radio"></div>
-          </div>
-          <div class="pay-method">
-            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
-            <div style="flex:1;"><div class="name">Moov Money</div><div class="sub">Paiement mobile</div></div>
-            <div class="radio"></div>
-          </div>
-          <div class="pay-method">
-            <div class="ic"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
-            <div style="flex:1;"><div class="name">Carte bancaire</div><div class="sub">Visa, Mastercard</div></div>
-            <div class="radio"></div>
-          </div>
-          <div class="pay-summary">
-            <div class="line"><span>Sous-total</span><span>8 000 F</span></div>
-            <div class="line"><span>Livraison</span><span>1 000 F</span></div>
-            <div class="line total"><span>Total à payer</span><span>9 000 F</span></div>
-          </div>
-          <div style="padding:0 14px;"><button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-bottom:12px;">Payer 9 000 FCFA</button></div>
-          <div class="fedapay-badge"><i class="ti ti-shield-check" aria-hidden="true"></i>Paiement sécurisé par <b>FedaPay</b></div>
-        </div>
-      </div></div>
-    </div>
-
-  </div>
-</section>
-<div class="section-divider"><span>Étape suivante</span></div>
-
-<!-- ================= SECTION 1 — CONFIRMATION ================= -->
-<section class="mockup-section">
-  <div class="section-head">
-    <div class="num">Nouveaux écrans</div>
-    <h2>Écrans de confirmation</h2>
-    <p>Ce que le client voit juste après avoir validé une commande à emporter ou réservé une table.</p>
-  </div>
-  <div class="stage-row">
-
-    <div class="phone-block">
-      <div class="phone-label">Confirmation · Commande à emporter</div>
-      <div class="phone"><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
-        <div class="screen-body">
-          <div class="conf-wrap">
-            <div class="conf-icon"><i class="ti ti-check" aria-hidden="true"></i></div>
-            <h2>Paiement reçu !</h2>
-            <div class="ref">Commande N° SFC-0842</div>
-            <div class="conf-card">
-              <div class="row"><span class="k">2× Riz blanc & sauce mouton</span><span class="v">7 000 F</span></div>
-              <div class="row"><span class="k">1× Brochettes au feu de bois</span><span class="v">2 500 F</span></div>
-              <div class="row total"><span class="k">Total payé</span><span class="v">9 500 FCFA</span></div>
-            </div>
-            <div class="conf-note"><i class="ti ti-mail" aria-hidden="true"></i>Le reçu a été envoyé sur votre compte, et une copie transmise au restaurant pour préparation immédiate.</div>
-            <div class="conf-note"><i class="ti ti-map-pin" aria-hidden="true"></i>Retrait à Haie Vive, Boulevard de la Marina — aujourd'hui à 19h30.</div>
-            <div class="conf-actions">
-              <button class="btn-wa" style="background:var(--primary);"><i class="ti ti-receipt" aria-hidden="true"></i>Voir mon reçu</button>
-              <button class="btn-ghost">Retour à l'accueil</button>
-            </div>
-          </div>
-        </div>
-        <div class="tabbar-mini">
-          <div class="grp">
-            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
-            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
-            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
-            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
-            <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
     <div class="phone-block">
       <div class="phone-label">Confirmation · Réservation de table</div>
       <div class="phone"><div class="screen">
@@ -693,6 +667,93 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
       </div></div>
     </div>
 
+  </div>
+</section>
+
+<div class="section-divider"><span>Pages transverses</span></div>
+
+<!-- ================= SECTION 2 — PAGES TRANSVERSES ================= -->
+<section class="mockup-section">
+  <div class="section-head">
+    <div class="num">Accessibles à tout moment</div>
+    <h2>Contact, profil & mes commandes</h2>
+    <p>Ces écrans ne font partie d'aucun tunnel : on y accède depuis la barre du bas, à tout moment. Profil remplace l'ancien menu burger.</p>
+  </div>
+  <div class="stage-row">
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Contact</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;" aria-hidden="true"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user" aria-hidden="true"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <h2 style="font-family:Anton; font-size:24px; text-transform:uppercase; color:var(--ink); margin:14px 14px 12px;">Retrouvez-nous</h2>
+          <div class="contact-row"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Haie Vive, Boulevard de la Marina, Cotonou</span></div>
+          <div class="contact-row"><i class="ti ti-clock" aria-hidden="true"></i><span>Mardi - Dimanche, dès 11h30 non-stop</span></div>
+          <div class="contact-row"><i class="ti ti-phone" aria-hidden="true"></i><span>+229 01 00 00 00 (Service client & WhatsApp)</span></div>
+          <div class="map-block">
+            <iframe src="https://www.google.com/maps?q=994W%2BJ67+Cotonou&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localisation Street Food Cotonou"></iframe>
+            <div class="map-cap"><i class="ti ti-map-pin" aria-hidden="true"></i><span>994W+J67, Cotonou</span><a href="https://www.google.com/maps/search/?api=1&query=994W%2BJ67+Cotonou" target="_blank" rel="noopener">Itinéraire</a></div>
+          </div>
+          <div class="social-row">
+            <a href="https://instagram.com" style="background:var(--container-high);"><i class="ti ti-brand-instagram" style="font-size:19px; color:var(--ink);" aria-hidden="true"></i></a>
+            <a href="https://wa.me/" style="background:#25D366;"><i class="ti ti-brand-whatsapp" style="font-size:19px; color:#fff;" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
+            <div class="t on"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
+            <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="phone-block">
+      <div class="phone-label">Écran · Profil / Plus</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
+          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;" aria-hidden="true"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user" aria-hidden="true"></i></div></div>
+        </div>
+        <div class="screen-body">
+          <div class="profile-greet">
+            <div class="av"><i class="ti ti-user" aria-hidden="true"></i></div>
+            <div><div class="t">Bienvenue</div><div class="s">Connectez-vous pour suivre vos commandes</div></div>
+          </div>
+          <div class="profile-links">
+            <div class="profile-link"><i class="ti ti-receipt" aria-hidden="true"></i>Mes commandes</div>
+            <div class="profile-link"><i class="ti ti-armchair" aria-hidden="true"></i>Mes réservations</div>
+            <div class="profile-link new"><i class="ti ti-photo" aria-hidden="true"></i>Galerie photo</div>
+            <div class="profile-link new"><i class="ti ti-info-circle" aria-hidden="true"></i>À propos</div>
+            <div class="profile-link"><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</div>
+          </div>
+          <div class="menu-bottom" style="border-top:none; padding:0 14px 18px;">
+            <button class="menu-cta"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Nous contacter sur WhatsApp</button>
+            <div class="menu-social">
+              <a href="#"><i class="ti ti-brand-instagram" style="font-size:18px;" aria-hidden="true"></i></a>
+              <a href="#"><i class="ti ti-brand-facebook" style="font-size:18px;" aria-hidden="true"></i></a>
+              <a href="#"><i class="ti ti-phone" style="font-size:18px;" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
+            <div class="t on"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
     <div class="phone-block">
       <div class="phone-label">Écran · Mes commandes (avec annulation)</div>
       <div class="phone"><div class="screen">
@@ -739,12 +800,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 
 <div class="section-divider"><span>Contenu & découverte</span></div>
 
-<!-- ================= SECTION 2 — GALERIE & À PROPOS ================= -->
+<!-- ================= SECTION 3 — GALERIE & À PROPOS ================= -->
 <section class="mockup-section">
   <div class="section-head">
     <div class="num">Nouvelles pages</div>
     <h2>Galerie photo & À propos</h2>
-    <p>Deux écrans accessibles depuis le menu, pour donner envie et raconter le lieu.</p>
+    <p>Deux écrans accessibles depuis le profil, pour donner envie et raconter le lieu.</p>
   </div>
   <div class="stage-row">
 
@@ -785,7 +846,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
         </div>
       </div></div>
     </div>
-
     <div class="phone-block">
       <div class="phone-label">Écran · À propos</div>
       <div class="phone"><div class="screen">
@@ -823,61 +883,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
             <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
             <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
             <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-
-  </div>
-</section>
-
-<div class="section-divider"><span>Se repérer dans l'app</span></div>
-
-<!-- ================= SECTION 3 — NAVIGATION UNIFIÉE ================= -->
-<section class="mockup-section" style="padding-bottom:30px;">
-  <div class="section-head">
-    <div class="num">Structure · révisée</div>
-    <h2>Onglet Profil (remplace le menu burger)</h2>
-    <p>Un seul modèle de navigation : la barre du bas donne accès à toutes les pages, le panier reste uniquement en haut à droite, et l'ancien menu ☰ devient l'onglet Profil ci-dessous.</p>
-  </div>
-  <div class="stage-row">
-
-    <div class="phone-block">
-      <div class="phone-label">Écran · Profil / Plus</div>
-      <div class="phone"><div class="screen">
-        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
-        <div class="topbar">
-          <div class="id"><div class="lines"><span class="a">Cotonou</span><span class="b">Street Food</span></div></div>
-          <div class="actions"><div style="position:relative;"><i class="ti ti-shopping-bag" style="font-size:19px;" aria-hidden="true"></i><span style="position:absolute;top:-6px;right:-8px;background:var(--primary);color:#fff;font-size:9px;font-weight:700;border-radius:50%;width:15px;height:15px;display:flex;align-items:center;justify-content:center;">2</span></div><div class="avatar"><i class="ti ti-user" aria-hidden="true"></i></div></div>
-        </div>
-        <div class="screen-body">
-          <div class="profile-greet">
-            <div class="av"><i class="ti ti-user" aria-hidden="true"></i></div>
-            <div><div class="t">Bienvenue</div><div class="s">Connectez-vous pour suivre vos commandes</div></div>
-          </div>
-          <div class="profile-links">
-            <div class="profile-link"><i class="ti ti-receipt" aria-hidden="true"></i>Mes commandes</div>
-            <div class="profile-link"><i class="ti ti-armchair" aria-hidden="true"></i>Mes réservations</div>
-            <div class="profile-link new"><i class="ti ti-photo" aria-hidden="true"></i>Galerie photo</div>
-            <div class="profile-link new"><i class="ti ti-info-circle" aria-hidden="true"></i>À propos</div>
-            <div class="profile-link"><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</div>
-          </div>
-          <div class="menu-bottom" style="border-top:none; padding:0 14px 18px;">
-            <button class="menu-cta"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Nous contacter sur WhatsApp</button>
-            <div class="menu-social">
-              <a href="#"><i class="ti ti-brand-instagram" style="font-size:18px;" aria-hidden="true"></i></a>
-              <a href="#"><i class="ti ti-brand-facebook" style="font-size:18px;" aria-hidden="true"></i></a>
-              <a href="#"><i class="ti ti-phone" style="font-size:18px;" aria-hidden="true"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="tabbar-mini">
-          <div class="grp">
-            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
-            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
-            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
-            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
-            <div class="t on"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
           </div>
         </div>
       </div></div>
