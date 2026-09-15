@@ -260,6 +260,21 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 .admin-switch::after{content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff;}
 .admin-switch.on::after{left:16px;}
 .admin-add-btn{display:flex; align-items:center; gap:8px; background:var(--primary); color:#fff; border:none; padding:9px 15px; border-radius:10px; font-weight:800; font-size:12px;}
+.admin-cols{display:grid; grid-template-columns:1.3fr 1fr; gap:18px; align-items:start;}
+.admin-chart{display:flex; align-items:flex-end; gap:12px; height:140px; padding:20px 20px 30px; position:relative;}
+.admin-chart .bar{flex:1; height:100%; display:flex; align-items:flex-end; position:relative;}
+.admin-chart .bar .fill{width:100%; background:var(--primary); border-radius:6px 6px 0 0;}
+.admin-chart .bar.low .fill{background:var(--container-high);}
+.admin-chart .bar span{position:absolute; bottom:-20px; left:0; right:0; text-align:center; font-size:10px; color:var(--ink-soft); font-weight:700;}
+.admin-rank{display:flex; align-items:center; gap:10px; padding:11px 18px; border-top:1px solid var(--container);}
+.admin-rank:first-child{border-top:none;}
+.admin-rank .n{width:22px; height:22px; border-radius:50%; background:var(--container-high); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:var(--ink); flex:none;}
+.admin-rank .name{flex:1; font-size:13px; font-weight:700; color:var(--ink);}
+.admin-rank .count{font-size:12px; color:var(--ink-soft); font-weight:700;}
+.admin-set-row{display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-top:1px solid var(--container);}
+.admin-set-row:first-child{border-top:none;}
+.admin-set-row .lbl{font-size:13px; font-weight:700; color:var(--ink);}
+.admin-set-row .sub{font-size:11px; color:var(--ink-soft); margin-top:2px;}
 
 /* --- client · mes commandes --- */
 .my-order-card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);margin:0 14px 10px;}
@@ -337,7 +352,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
             <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:16px; background:linear-gradient(to right, rgba(30,27,17,0.55), transparent);">
               <span style="font-size:10px; font-weight:800; letter-spacing:0.1em; color:var(--amber); text-transform:uppercase;">Nocturne exclusive</span>
               <p style="font-family:Anton; color:#fff; font-size:20px; text-transform:uppercase; margin:4px 0 8px; line-height:0.95;">Braises & ambiance<br>jusqu'au bout de la nuit</p>
-              <a href="https://wa.me/?text=Je%20veux%20reserver%20une%20table" style="align-self:flex-start; background:#fff; color:var(--ink); font-weight:700; font-size:12px; padding:8px 14px; border-radius:10px; display:flex; align-items:center; gap:6px;"><i class="ti ti-armchair" style="font-size:15px;" aria-hidden="true"></i>Réserver une table</a>
+              <button style="all:unset; cursor:pointer; align-self:flex-start; background:#fff; color:var(--ink); font-weight:700; font-size:12px; padding:8px 14px; border-radius:10px; display:flex; align-items:center; gap:6px;"><i class="ti ti-armchair" style="font-size:15px;" aria-hidden="true"></i>Réserver une table</button>
             </div>
           </div>
           <div style="margin:0 14px 20px; background:#fff; border-radius:18px; box-shadow:0 2px 10px rgba(0,0,0,0.05); overflow:hidden; display:flex; align-items:center; gap:12px; padding:12px;">
@@ -585,7 +600,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
   <div class="section-head">
     <div class="num">Flux client · réservation</div>
     <h2>Parcours de réservation</h2>
-    <p>Un tunnel à part, indépendant de la commande : réserver une table, puis la confirmation.</p>
+    <p>Un tunnel à part, indépendant de la commande : réserver une table, créer un compte, régler l'acompte, puis la confirmation.</p>
   </div>
   <div class="stage-row">
 
@@ -618,7 +633,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
             </div>
             <label class="field-label" for="resa-nom">Nom</label>
             <input type="text" id="resa-nom" name="nom" placeholder="Votre nom" class="field-input" style="margin-bottom:6px;">
-            <button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-top:8px;">Confirmer la réservation</button>
+            <button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-top:8px;">Continuer</button>
           </div>
         </div>
         <div class="tabbar-mini">
@@ -629,6 +644,71 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
             <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
             <div class="t"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
           </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="phone-block">
+      <div class="phone-label">Écran · Créer un compte (réservation)</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Finaliser</span></div></div>
+          <div class="actions"></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px;">
+            <h2 style="font-family:Anton; font-size:22px; text-transform:uppercase; color:var(--ink); margin:0 0 4px;">Créer votre compte</h2>
+            <p style="font-size:12px; color:var(--ink-soft); margin:0 0 14px;">Pour garantir votre table et recevoir la confirmation. Ça prend 20 secondes.</p>
+            <label class="field-label" for="racc-nom">Nom complet</label>
+            <input type="text" id="racc-nom" placeholder="Ex : Fabrice Houngbédji" class="field-input">
+            <label class="field-label" for="racc-tel">Téléphone</label>
+            <input type="tel" id="racc-tel" placeholder="+229 XX XX XX XX" class="field-input">
+            <label class="field-label" for="racc-mail">E-mail (optionnel)</label>
+            <input type="email" id="racc-mail" placeholder="vous@exemple.com" class="field-input">
+            <label class="field-label" for="racc-pass">Mot de passe</label>
+            <input type="password" id="racc-pass" placeholder="6 caractères minimum" class="field-input" style="margin-bottom:6px;">
+            <button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-top:8px;">Continuer vers l'acompte</button>
+            <p style="text-align:center; font-size:11px; color:var(--ink-soft); margin:12px 0 0;">Déjà client ? <span style="color:var(--primary); font-weight:700;">Se connecter</span></p>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <div class="phone-block">
+      <div class="phone-label">Écran · Paiement de l'acompte</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Acompte</span></div></div>
+          <div class="actions"></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px 14px 6px;">
+            <h2 style="font-family:Anton; font-size:20px; text-transform:uppercase; color:var(--ink); margin:0 0 4px;">Garantir la table</h2>
+            <p style="font-size:12px; color:var(--ink-soft); margin:0;">Un acompte remboursable confirme votre réservation.</p>
+          </div>
+          <div class="pay-summary" style="margin-top:6px;">
+            <div class="line"><span>Table pour</span><span>2 personnes</span></div>
+            <div class="line"><span>Date</span><span>Sam. 20 sept., 19h00</span></div>
+            <div class="line total"><span>Acompte à payer</span><span>2 000 F</span></div>
+          </div>
+          <h2 style="font-family:Anton; font-size:16px; text-transform:uppercase; color:var(--ink); margin:6px 14px 10px;">Moyen de paiement</h2>
+          <div class="pay-method on">
+            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">MTN Mobile Money</div><div class="sub">+229 XX XX XX XX</div></div>
+            <div class="radio"></div>
+          </div>
+          <div class="pay-method">
+            <div class="ic"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">Moov Money</div><div class="sub">Paiement mobile</div></div>
+            <div class="radio"></div>
+          </div>
+          <div class="pay-method">
+            <div class="ic"><i class="ti ti-credit-card" aria-hidden="true"></i></div>
+            <div style="flex:1;"><div class="name">Carte bancaire</div><div class="sub">Visa, Mastercard</div></div>
+            <div class="radio"></div>
+          </div>
+          <div style="padding:4px 14px 0;"><button style="width:100%; height:48px; background:var(--primary); color:#fff; border:none; border-radius:14px; font-weight:800; font-size:14px; text-transform:uppercase; margin-bottom:12px;">Payer 2 000 FCFA</button></div>
+          <div class="fedapay-badge"><i class="ti ti-shield-check" aria-hidden="true"></i>Paiement sécurisé par <b>FedaPay</b></div>
         </div>
       </div></div>
     </div>
@@ -648,9 +728,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
               <div class="row"><span class="k">Personnes</span><span class="v">4</span></div>
               <div class="row"><span class="k">Espace</span><span class="v">Terrasse nocturne</span></div>
             </div>
-            <div class="conf-note"><i class="ti ti-clock" aria-hidden="true"></i>Merci de prévenir par WhatsApp en cas de retard de plus de 15 minutes, la table reste bloquée jusque-là.</div>
+            <div class="conf-note"><i class="ti ti-clock" aria-hidden="true"></i>La table reste bloquée 15 minutes après l'heure prévue. Vous pouvez modifier ou annuler depuis "Mes réservations".</div>
             <div class="conf-actions">
-              <button class="btn-wa"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i>Envoyer la confirmation par WhatsApp</button>
+              <button class="btn-wa" style="background:var(--primary);"><i class="ti ti-armchair" aria-hidden="true"></i>Voir mes réservations</button>
               <button class="btn-ghost">Ajouter à mon calendrier</button>
             </div>
           </div>
@@ -676,8 +756,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
 <section class="mockup-section">
   <div class="section-head">
     <div class="num">Accessibles à tout moment</div>
-    <h2>Contact, profil & mes commandes</h2>
-    <p>Ces écrans ne font partie d'aucun tunnel : on y accède depuis la barre du bas, à tout moment. Profil remplace l'ancien menu burger.</p>
+    <h2>Contact, profil, commandes & réservations</h2>
+    <p>Ces écrans ne font partie d'aucun tunnel : on y accède depuis la barre du bas ou le profil, à tout moment. Profil remplace l'ancien menu burger.</p>
   </div>
   <div class="stage-row">
 
@@ -795,6 +875,87 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
       </div></div>
     </div>
 
+    <div class="phone-block">
+      <div class="phone-label">Écran · Mes réservations</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Mes réservations</span></div></div>
+        </div>
+        <div class="screen-body">
+          <div class="my-order-card">
+            <div class="top"><span class="ref">Réservation SFC-R014</span><span class="status-badge pending"><i class="ti ti-clock" aria-hidden="true"></i>Acompte en attente</span></div>
+            <div class="items">Sam. 20 sept., 19h00 · 2 personnes</div>
+            <div class="foot"><span class="price">Acompte 2 000 F</span><button class="cancel-order-btn"><i class="ti ti-x" aria-hidden="true"></i>Annuler</button></div>
+          </div>
+          <div class="my-order-card">
+            <div class="top"><span class="ref">Réservation SFC-R013</span><span class="status-badge confirmed"><i class="ti ti-check" aria-hidden="true"></i>Confirmée</span></div>
+            <div class="items">Ven. 19 sept., 20h00 · 4 personnes</div>
+            <div class="foot"><span class="price">Acompte 4 000 F</span><button class="cancel-order-btn"><i class="ti ti-x" aria-hidden="true"></i>Annuler</button></div>
+          </div>
+          <div class="my-order-card">
+            <div class="top"><span class="ref">Réservation SFC-R009</span><span class="status-badge done"><i class="ti ti-check" aria-hidden="true"></i>Honorée</span></div>
+            <div class="items">Dim. 7 sept., 19h30 · 2 personnes</div>
+            <div class="foot"><span class="price">Acompte 2 000 F</span><span style="font-size:11px; color:var(--ink-soft);">Non annulable</span></div>
+          </div>
+          <div class="my-order-card">
+            <div class="top"><span class="ref">Réservation SFC-R006</span><span class="status-badge cancelled"><i class="ti ti-x" aria-hidden="true"></i>Annulée</span></div>
+            <div class="items">Mar. 2 sept., 21h00 · 3 personnes</div>
+            <div class="foot"><span class="price">Acompte remboursé</span><span style="font-size:11px; color:var(--ink-soft);">Annulée par vous</span></div>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
+            <div class="t on"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="phone-block">
+      <div class="phone-label">Écran · Paramètres</div>
+      <div class="phone"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="icons"><i class="ti ti-antenna-bars-5" aria-hidden="true"></i><i class="ti ti-wifi" aria-hidden="true"></i><i class="ti ti-battery-3" aria-hidden="true"></i></span></div>
+        <div class="topbar">
+          <div class="id"><i class="ti ti-arrow-left" style="font-size:17px;" aria-hidden="true"></i><div class="lines"><span class="a">Paramètres</span></div></div>
+        </div>
+        <div class="screen-body">
+          <div style="padding:14px;">
+            <label class="field-label" for="set-nom">Nom complet</label>
+            <input type="text" id="set-nom" value="Fabrice Houngbédji" class="field-input">
+            <label class="field-label" for="set-tel">Téléphone</label>
+            <input type="tel" id="set-tel" value="+229 01 00 00 00" class="field-input">
+            <label class="field-label" for="set-mail">E-mail</label>
+            <input type="email" id="set-mail" value="fabrice@exemple.com" class="field-input" style="margin-bottom:6px;">
+          </div>
+          <div class="profile-links" style="margin-top:2px;">
+            <div class="profile-link"><i class="ti ti-lock" aria-hidden="true"></i>Changer le mot de passe</div>
+            <div class="admin-toggle" style="background:#fff; border-radius:12px; padding:12px; box-shadow:0 2px 8px rgba(0,0,0,.05);">Notifications commandes<div class="admin-switch on"></div></div>
+            <div class="admin-toggle" style="background:#fff; border-radius:12px; padding:12px; box-shadow:0 2px 8px rgba(0,0,0,.05);">Notifications promos<div class="admin-switch"></div></div>
+            <div class="profile-link"><i class="ti ti-map-pin" aria-hidden="true"></i>Adresses enregistrées</div>
+            <div class="profile-link"><i class="ti ti-credit-card" aria-hidden="true"></i>Moyens de paiement</div>
+          </div>
+          <div style="padding:4px 14px 18px;">
+            <button style="width:100%; height:46px; background:var(--container-high); color:var(--ink); border:none; border-radius:14px; font-weight:800; font-size:13px; text-transform:uppercase; margin-bottom:10px;"><i class="ti ti-logout" style="font-size:16px; margin-right:6px;" aria-hidden="true"></i>Se déconnecter</button>
+            <p style="text-align:center; font-size:11px; color:var(--primary); font-weight:700; margin:0;">Supprimer mon compte</p>
+          </div>
+        </div>
+        <div class="tabbar-mini">
+          <div class="grp">
+            <div class="t"><i class="ti ti-flame" aria-hidden="true"></i><span>Accueil</span></div>
+            <div class="t"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i><span>Menu</span></div>
+            <div class="t"><i class="ti ti-armchair" aria-hidden="true"></i><span>Résa</span></div>
+            <div class="t"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Contact</span></div>
+            <div class="t on"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
   </div>
 </section>
 
@@ -898,7 +1059,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
   <div class="section-head">
     <div class="num">Nouveau · Admin</div>
     <h2>Back-office restaurant</h2>
-    <p>Les commandes payées arrivent ici en temps réel — plus besoin de surveiller WhatsApp.</p>
+    <p>Les commandes payées arrivent ici en temps réel. Tableau de bord et statistiques sont désormais réunis sur un seul écran, et les paramètres du restaurant sont gérés depuis leur propre page.</p>
   </div>
 
   <div class="admin-frame" style="margin:30px auto;">
@@ -910,13 +1071,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
           <a><i class="ti ti-receipt-2" aria-hidden="true"></i>Commandes</a>
           <a><i class="ti ti-armchair" aria-hidden="true"></i>Réservations</a>
           <a><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Menu</a>
-          <a><i class="ti ti-chart-bar" aria-hidden="true"></i>Statistiques</a>
           <a><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</a>
         </div>
       </div>
       <div class="admin-main">
         <div class="admin-topbar">
-          <h1>Tableau de bord</h1>
+          <h1>Tableau de bord & Statistiques</h1>
           <div style="display:flex; align-items:center; gap:12px;">
             <div class="search"><i class="ti ti-search" aria-hidden="true"></i>Rechercher une commande…</div>
             <div class="avatar" style="width:32px; height:32px;"><i class="ti ti-user" aria-hidden="true"></i></div>
@@ -928,6 +1088,27 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
             <div class="admin-stat"><div class="lbl">Revenu du jour</div><div class="val">184 500 F</div><div class="delta">▲ 8% vs hier</div></div>
             <div class="admin-stat"><div class="lbl">Réservations ce soir</div><div class="val">9</div><div class="delta down">▼ 2 vs hier</div></div>
             <div class="admin-stat"><div class="lbl">Panier moyen</div><div class="val">4 986 F</div><div class="delta">▲ 3% vs hier</div></div>
+          </div>
+          <div class="admin-cols">
+            <div class="admin-panel">
+              <div class="head"><h3>Revenu des 7 derniers jours</h3><span style="font-size:11px; font-weight:700; color:var(--primary);">Cette semaine</span></div>
+              <div class="admin-chart">
+                <div class="bar low"><div class="fill" style="height:38%;"></div><span>Lun</span></div>
+                <div class="bar low"><div class="fill" style="height:52%;"></div><span>Mar</span></div>
+                <div class="bar low"><div class="fill" style="height:46%;"></div><span>Mer</span></div>
+                <div class="bar low"><div class="fill" style="height:64%;"></div><span>Jeu</span></div>
+                <div class="bar low"><div class="fill" style="height:78%;"></div><span>Ven</span></div>
+                <div class="bar low"><div class="fill" style="height:95%;"></div><span>Sam</span></div>
+                <div class="bar"><div class="fill" style="height:100%;"></div><span>Dim</span></div>
+              </div>
+            </div>
+            <div class="admin-panel">
+              <div class="head"><h3>Plats les plus vendus</h3></div>
+              <div class="admin-rank"><div class="n">1</div><div class="name">Riz sauce mouton</div><div class="count">142 vendus</div></div>
+              <div class="admin-rank"><div class="n">2</div><div class="name">Demi-poulet braisé</div><div class="count">98 vendus</div></div>
+              <div class="admin-rank"><div class="n">3</div><div class="name">Brochettes au feu de bois</div><div class="count">86 vendus</div></div>
+              <div class="admin-rank"><div class="n">4</div><div class="name">Bissap glacé</div><div class="count">71 vendus</div></div>
+            </div>
           </div>
           <div class="admin-panel">
             <div class="head"><h3>Dernières commandes</h3><span style="font-size:11px; font-weight:700; color:var(--primary);">Voir tout</span></div>
@@ -953,7 +1134,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
           <a class="on"><i class="ti ti-receipt-2" aria-hidden="true"></i>Commandes</a>
           <a><i class="ti ti-armchair" aria-hidden="true"></i>Réservations</a>
           <a><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Menu</a>
-          <a><i class="ti ti-chart-bar" aria-hidden="true"></i>Statistiques</a>
           <a><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</a>
         </div>
       </div>
@@ -1019,7 +1199,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
           <a><i class="ti ti-receipt-2" aria-hidden="true"></i>Commandes</a>
           <a class="on"><i class="ti ti-armchair" aria-hidden="true"></i>Réservations</a>
           <a><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Menu</a>
-          <a><i class="ti ti-chart-bar" aria-hidden="true"></i>Statistiques</a>
           <a><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</a>
         </div>
       </div>
@@ -1082,7 +1261,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
           <a><i class="ti ti-receipt-2" aria-hidden="true"></i>Commandes</a>
           <a><i class="ti ti-armchair" aria-hidden="true"></i>Réservations</a>
           <a class="on"><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Menu</a>
-          <a><i class="ti ti-chart-bar" aria-hidden="true"></i>Statistiques</a>
           <a><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</a>
         </div>
       </div>
@@ -1131,6 +1309,58 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--primary);outline-of
               <div class="price">3 000 F</div>
               <div class="admin-toggle">Épuisé<div class="admin-switch"></div></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-frame" style="margin:30px auto 0;">
+    <div class="admin-shell">
+      <div class="admin-sidebar">
+        <div class="brand">Cotonou<span>Street Food · Admin</span></div>
+        <div class="admin-nav">
+          <a><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Tableau de bord</a>
+          <a><i class="ti ti-receipt-2" aria-hidden="true"></i>Commandes</a>
+          <a><i class="ti ti-armchair" aria-hidden="true"></i>Réservations</a>
+          <a><i class="ti ti-tools-kitchen-2" aria-hidden="true"></i>Menu</a>
+          <a class="on"><i class="ti ti-settings" aria-hidden="true"></i>Paramètres</a>
+        </div>
+      </div>
+      <div class="admin-main">
+        <div class="admin-topbar">
+          <h1>Paramètres du restaurant</h1>
+        </div>
+        <div class="admin-body">
+          <div class="admin-panel">
+            <div class="head"><h3>Informations générales</h3></div>
+            <div class="admin-set-row"><div><div class="lbl">Nom du restaurant</div><div class="sub">Cotonou Street Food</div></div><i class="ti ti-chevron-right" aria-hidden="true"></i></div>
+            <div class="admin-set-row"><div><div class="lbl">Adresse</div><div class="sub">994W+J67, Haie Vive, Cotonou</div></div><i class="ti ti-chevron-right" aria-hidden="true"></i></div>
+            <div class="admin-set-row"><div><div class="lbl">Horaires d'ouverture</div><div class="sub">Mardi – Dimanche, 11h30 – 23h00</div></div><i class="ti ti-chevron-right" aria-hidden="true"></i></div>
+            <div class="admin-set-row"><div><div class="lbl">Frais de livraison</div><div class="sub">1 000 FCFA, forfait unique</div></div><i class="ti ti-chevron-right" aria-hidden="true"></i></div>
+          </div>
+          <div class="admin-cols">
+            <div class="admin-panel">
+              <div class="head"><h3>Paiement & réservation</h3></div>
+              <div class="admin-set-row"><div><div class="lbl">Paiement en ligne</div><div class="sub">Via FedaPay (MoMo, Moov, carte)</div></div><div class="admin-switch on"></div></div>
+              <div class="admin-set-row"><div><div class="lbl">Acompte de réservation</div><div class="sub">2 000 FCFA par table</div></div><div class="admin-switch on"></div></div>
+              <div class="admin-set-row"><div><div class="lbl">Commandes à emporter</div><div class="sub">Ouvertes aux clients</div></div><div class="admin-switch on"></div></div>
+            </div>
+            <div class="admin-panel">
+              <div class="head"><h3>Notifications</h3></div>
+              <div class="admin-set-row"><div><div class="lbl">Son à l'arrivée d'une commande</div></div><div class="admin-switch on"></div></div>
+              <div class="admin-set-row"><div><div class="lbl">Alerte réservation en attente</div></div><div class="admin-switch on"></div></div>
+              <div class="admin-set-row"><div><div class="lbl">Rapport quotidien par e-mail</div></div><div class="admin-switch"></div></div>
+            </div>
+          </div>
+          <div class="admin-panel">
+            <div class="head"><h3>Équipe & accès</h3><button class="admin-add-btn" style="padding:7px 12px; font-size:11px;"><i class="ti ti-plus" aria-hidden="true"></i>Inviter</button></div>
+            <table class="admin-table">
+              <tr><th>Nom</th><th>Rôle</th><th>Accès</th><th></th></tr>
+              <tr><td>Rosine A.</td><td>Manager</td><td>Complet</td><td><i class="ti ti-dots" aria-hidden="true"></i></td></tr>
+              <tr><td>Yannick K.</td><td>Cuisine</td><td>Commandes uniquement</td><td><i class="ti ti-dots" aria-hidden="true"></i></td></tr>
+              <tr><td>Aïcha D.</td><td>Caisse</td><td>Commandes & paiements</td><td><i class="ti ti-dots" aria-hidden="true"></i></td></tr>
+            </table>
           </div>
         </div>
       </div>
